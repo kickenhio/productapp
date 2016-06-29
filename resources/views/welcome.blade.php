@@ -1,45 +1,29 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('layouts.'.(Request::ajax() ? 'container' : 'request'))
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-            </div>
-        </div>
-    </body>
-</html>
+@section('content')
+	<div class="container">
+	    <div id="products" class="row list-group">
+	        <div class="item col-xs-12 ">
+	            <div class="thumbnail">
+					<div class="row">
+						<div class="col-xs-12 col-md-4">
+							<img src="http://placehold.it/350x150">
+						</div>
+						<div class="col-xs-12 col-md-8">
+			                <div class="caption">
+			                    <h2 class="group inner list-group-item-heading">
+			                        Product title</h2>
+			                    <div class="row">
+			                        <div class="col-xs-12 col-md-6">
+			                            <p class="lead">
+			                                $21.000</p>
+			                        </div>
+								</div>
+			                </div>
+						</div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+@endsection

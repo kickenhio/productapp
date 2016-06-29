@@ -24,13 +24,6 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
-
-    /**
      * Create a new authentication controller instance.
      *
      * @return void
@@ -54,7 +47,7 @@ class AuthController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
     }
-
+    
     /**
      * Create a new user instance after a valid registration.
      *
@@ -68,5 +61,36 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+    
+    /**
+     * Send the response after the user was authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  bool  $throttles
+     * @return \Illuminate\Http\Response
+     */
+    protected function handleUserWasAuthenticated($request, $throttles)
+    {
+        if ($throttles) {
+            $this->clearLoginAttempts($request);
+        }
+
+        if (method_exists($this, 'authenticated')) {
+            return $this->authenticated($request, Auth::guard($this->getGuard())->user());
+        }
+
+        return response()->json(['status' => 'ok']);
+    }
+    
+    /**
+     * Get the failed login response instance.
+     *
+     * @param \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    protected function sendFailedLoginResponse($request)
+    {
+	return response()->json(['password' => $this->getFailedLoginMessage()], 401);
     }
 }

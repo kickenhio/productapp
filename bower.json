@@ -1,0 +1,26 @@
+{
+  "name": "productapp",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Kickenhi0 <kickenhio@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/kickenhio/productapp",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "resources/components/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.7",
+    "angular-route": "^1.5.7",
+    "angular-animate": "^1.5.7",
+    "vex": "^2.3.4",
+    "angular-resource": "^1.5.7"
+  }
+}
