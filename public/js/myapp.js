@@ -47,6 +47,7 @@ var productApp = angular.module('productApp', ['ngRoute', 'ngAnimate', 'ngResour
 		});
 
 		$scope.create = function(){
+			$scope.newProduct = {};
 			$http.get('/product/create').then(function(response) {
 				vex.open({
 					content: '',
@@ -58,21 +59,24 @@ var productApp = angular.module('productApp', ['ngRoute', 'ngAnimate', 'ngResour
 				});
 			});
 		};
-		
+
 		$scope.alertNg = function(){
-			$http.get('/product/store', {
-
-				}).then(function(data) {
-					$scope.list.push({
-						'id' : $scope.list.length + 1,
-						'name' : 'OSkar',
-						'slug' : 'oskar',
-						'price' : 12.00,
-						'currency' : 'PLN'
-					});
+			$http.post('/product', $scope.newProduct).then(function(response) {
+					$scope.list.push(response.data);
 			});
-
 			vex.close();
+		};
+
+		$scope.delete = function(product) {
+			vex.dialog.confirm({
+			  message: 'Czy napewno usunac?',
+			  callback: function(accept) {
+				if(accept){
+					$http.delete("/product/delete/" + product.id).then(function(response) {
+						$scope.list.splice($scope.list.indexOf(product), 1);
+					});
+				}
+			}});
 		};
 	});
 

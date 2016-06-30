@@ -28,7 +28,7 @@ class ProductController extends Controller
     {
         return view('product.edit');
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -37,7 +37,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        dump($request->input());
+	$new = Product::create([
+	    'name' => $request->input('name'),
+	    'currency' => 'PLN',
+	    'price' => $request->input('price'),
+	    'slug' => str_slug($request->input('name'))
+	]);
+	
+	return response()->json($new->toArray());
     }
 
     /**

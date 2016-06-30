@@ -4,41 +4,32 @@
             <div class="panel-heading">Login</div>
             <div class="panel-body">
                 <form class="form-horizontal" role="form" ng-submit="alertNg()">
-					<input type="hidden" name="token" ng-model="user.token" value="{{ csrf_token() }}">
-                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                        <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+					<input type="hidden" name="token" ng-model="newProduct.token" value="{{ csrf_token() }}">
+
+					<div class="form-group">
+                        <label for="email" class="col-md-4 control-label">Name</label>
                         <div class="col-md-6">
-                            <input id="email" type="email" class="form-control" name="email" ng-model="user.email">
-                            <span ng-show="errorEmail" class="help-block">
-                                <strong>@{{errorEmail}}</strong>
+                            <input id="name" type="text" class="form-control" name="name" ng-model="newProduct.name">
+                            <span ng-show="error.name" class="help-block">
+                                <strong>@{{error.name}}</strong>
                             </span>
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                        <label for="password" class="col-md-4 control-label">Password</label>
+					<div class="form-group">
+                        <label for="email" class="col-md-4 control-label">Price</label>
                         <div class="col-md-6">
-                            <input id="password" type="password" class="form-control" ng-model="user.password" name="password">
-							<span ng-show="errorPassword" class="help-block">
-                                <strong>@{{errorPassword}}</strong>
+                            <input id="price" type="text" class="form-control" name="price" ng-model="newProduct.price">
+                            <span ng-show="error.price" class="help-block">
+                                <strong>@{{error.price}}</strong>
                             </span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="remember" ng-model="user.remember"> Remember Me
-                                </label>
-                            </div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                             <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-btn fa-sign-in"></i> Login
+                                <i class="fa fa-btn fa-sign-in"></i> Add
                             </button>
                         </div>
                     </div>
