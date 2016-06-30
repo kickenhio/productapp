@@ -9,13 +9,10 @@
 	<div class="item col-xs-12" data-ng-repeat="item in list | orderBy:'name'">
 	    <div class="thumbnail">
 			<div class="row">
-				<div class="col-xs-12 col-md-4">
-					<img src="http://placehold.it/350x150">
-				</div>
-				<div class="col-xs-12 col-md-8">
+				<div class="col-xs-12">
 					<div class="caption">
 					    <h2 class="group inner list-group-item-heading">
-							<a href="/product/@{{ item.id }}">@{{ item.name }}</a>
+							@{{ item.name }}
 						</h2>
 					    <div class="row">
 							<div class="col-xs-12 col-md-6">

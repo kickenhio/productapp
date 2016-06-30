@@ -16,9 +16,14 @@ Route::get('/', function () {
 });
 
 Route::resource('product', 'ProductController');
+Route::resource('attribute', 'AttributeController');
 
-Route::get('/lista', function () {
-    return view('lista');
+Route::get('/products', function () {
+    return view('product.list');
+});
+
+Route::get('/attributes', function () {
+    return view('attribute.list');
 });
 
 Route::auth();

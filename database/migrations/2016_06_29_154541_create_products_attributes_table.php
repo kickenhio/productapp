@@ -14,11 +14,13 @@ class CreateProductsAttributesTable extends Migration
     {
         Schema::create('attributes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('slug');
-            $table->string('price');
+            $table->decimal('price', 10, 2);
             $table->string('currency');
+	    $table->integer('product_id');
             $table->timestamps();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 

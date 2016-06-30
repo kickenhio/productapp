@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Product;
 use App\Attribute;
-use Carbon\Carbon;
 
-class ProductController extends Controller
+class AttributeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-	return response()->json(Product::with('attributes')->get()->toArray());
+	return response()->json(Attribute::all()->toArray());
     }
 
     /**
@@ -28,7 +26,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.edit');
+        return view('attribute.edit');
     }
     
     /**
@@ -40,28 +38,10 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 	$this->validate($request, [
-	    'name' => 'required|max:255',
-	    'currency' => 'required',
-	    'ean' => 'required|unique:products',
+	    'name' => 'required|max:255|unique:attributes',
 	    'price' => 'required|numeric|min:0',
 	    'slug' => 'required',
 	]);
-	
-	$product = Product::create($request->input());
-	
-	if ($request->has('attributes')){
-	    $attributes = $request->input('attributes');
-	    foreach($attributes as $postdata)
-	    {
-		$attribute = new Attribute();
-		$attribute->fill($postdata);
-		$attribute->product_id = $product->id;
-		$attribute->currency = $product->currency;
-		$attribute->save();
-	    }
-	}
-	$product->attributes;
-	return response()->json($product->toArray());
     }
 
     /**
@@ -72,8 +52,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-	$product = Product::findOrFail($id);
-	$product->attributes;
+	$product = Attribute::findOrFail($id);
 	return response()->json($product->toArray());
     }
 
@@ -85,9 +64,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-	$product = Product::findOrFail($id);
-	$product->attributes;
-	return view('product.edit');
+	$product = Attribute::findOrFail($id);
+	return view('attribute.edit');
     }
 
     /**
@@ -101,30 +79,14 @@ class ProductController extends Controller
     {
 	$this->validate($request, [
 	    'name' => 'required|max:255',
-	    'currency' => 'required',
-	    'ean' => 'required',
 	    'price' => 'required|numeric|min:0',
 	    'slug' => 'required',
 	]);
 	
-        $product = Product::findOrFail($id);
+        $product = Attribute::findOrFail($id);
 	$product->fill($request->input());
-	$product->updated_at = Carbon::now();
 	$product->save();
 	
-	$product->attributes()->delete();
-	if ($request->has('attributes')){
-	    $attributes = $request->input('attributes');
-	    foreach($attributes as $postdata)
-	    {
-		$attribute = new Attribute();
-		$attribute->fill($postdata);
-		$attribute->product_id = $product->id;
-		$attribute->currency = $product->currency;
-		$attribute->save();
-	    }
-	}
-	$product->attributes;
 	return response()->json($product->toArray());
     }
 
@@ -136,8 +98,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-	$product = Product::findOrFail($id);
-	$product->attributes()->delete();
+	$product = Attribute::findOrFail($id);
 	$product->delete();
     }
 }

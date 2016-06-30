@@ -16,10 +16,10 @@ class DummyProductSeeder extends Seeder
         DB::table('products')->insert([
             'name' => 'admin',
             'slug' => 'admin',
+            'ean' => 'HHSD-123',
             'price' => 12.00,
             'currency' => 'USD',
             'created_at' => Carbon::now(),
         ]);
-//        factory(App\Product::class, 20)->create();
     }
 }

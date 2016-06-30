@@ -15,11 +15,11 @@
 				<div class="col-xs-12 col-md-8">
 					<div class="caption">
 					    <h2 class="group inner list-group-item-heading">
-							<a href="/product/@{{ item.id }}">@{{ item.name }}</a>
+							<a href="#" ng-click="toggleExpanded(item)">@{{ item.name }}</a>
 						</h2>
 					    <div class="row">
 							<div class="col-xs-12 col-md-6">
-							    <p class="lead">@{{ item.price }} @{{ item.currency }}</p>
+							    Price: <span class="badge">@{{ calcSum(item.price, item.attributes) }} @{{ item.currency }}</span>
 							</div>
 						</div>
 					</div>
@@ -31,6 +31,15 @@
 							<i class="fa fa-btn fa-sign-in"></i> Edit
 						</button>
 					@endif
+				</div>
+
+				<div data-ng-if="item.expanded" class="item col-xs-12">
+					<ul class="list-group">
+						<li class="list-group-item" data-ng-repeat="option in item.attributes | orderBy:'name'">
+							<span class="badge">@{{ option.price }} @{{ item.currency }}</span>
+							<h5>@{{ option.name }}</h5>
+						</li>
+					</ul>
 				</div>
 			</div>
 	    </div>
