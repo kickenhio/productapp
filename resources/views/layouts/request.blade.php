@@ -7,6 +7,8 @@
 
     <title>Laravel</title>
 	<!-- ANGULAR -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="/js/vex.js"></script>
 	<script src="/js/angular.js"></script>
 	<script src="/js/angular-resource.js"></script>
 	<script src="/js/angular-route.js"></script>
@@ -19,6 +21,8 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/vex.css">
+    <link rel="stylesheet" href="/css/vex-theme-os.css">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 	<style>
 		body {
@@ -96,6 +100,5 @@
 		</nav>
 		@yield('content')
 	</div>
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>

@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
     <div id="products" class="row list-group">
+    <button class="btn btn-primary pull-right" ng-click="create()">dodaj</button>
 	<div class="item col-xs-12" data-ng-repeat="item in list | orderBy:'name'">
 	    <div class="thumbnail">
 			<div class="row">

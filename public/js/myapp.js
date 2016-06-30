@@ -1,3 +1,4 @@
+vex.defaultOptions.className = 'vex-theme-os';
 var productApp = angular.module('productApp', ['ngRoute', 'ngAnimate', 'ngResource']);
 
 	productApp.config(function($routeProvider, $locationProvider, $httpProvider) {
@@ -38,13 +39,41 @@ var productApp = angular.module('productApp', ['ngRoute', 'ngAnimate', 'ngResour
 		});
 	});
 
-	productApp.controller('ListController', function ($scope, $http){
+	productApp.controller('ListController', function ($scope, $http, $compile){
 		$scope.list = [];
 
 		$http.get("/product").then(function(response) {
 			$scope.list = response.data;
-			console.log($scope.list);
 		});
+
+		$scope.create = function(){
+			$http.get('/product/create').then(function(response) {
+				vex.open({
+					content: '',
+					afterOpen: function($vexContent) {
+						$content = $vexContent.append(response.data);
+						$compile($vexContent)($scope);
+						return $content;
+					}
+				});
+			});
+		};
+		
+		$scope.alertNg = function(){
+			$http.get('/product/store', {
+
+				}).then(function(data) {
+					$scope.list.push({
+						'id' : $scope.list.length + 1,
+						'name' : 'OSkar',
+						'slug' : 'oskar',
+						'price' : 12.00,
+						'currency' : 'PLN'
+					});
+			});
+
+			vex.close();
+		};
 	});
 
 	productApp.controller('LoginController', function ($scope, $http, $location){
