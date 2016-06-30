@@ -8,9 +8,6 @@ var productApp = angular.module('productApp', ['ngRoute', 'ngAnimate', 'ngResour
 		$routeProvider.when('/', {
 			 templateUrl: '/products',
 			 controller: 'ListController'
-		}).when('/attributes', {
-			 templateUrl: '/attributes',
-			 controller: 'AttributesController'
 		}).when('/login', {
 			 templateUrl: '/login',
 			 controller: 'LoginController'

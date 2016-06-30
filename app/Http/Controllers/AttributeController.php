@@ -38,7 +38,7 @@ class AttributeController extends Controller
     public function store(Request $request)
     {
 	$this->validate($request, [
-	    'name' => 'required|max:255|unique:attributes',
+	    'name' => 'required|max:255',
 	    'price' => 'required|numeric|min:0',
 	    'slug' => 'required',
 	]);
